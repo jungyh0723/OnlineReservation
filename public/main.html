@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛떨이 온라인 예약</title>
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="images/png" href="/image/logo.png">
+</head>
+<body>
+    <div class="header">
+        <img width="50px" src="/image/logo.png" alt="로고" />
+        <span class="title">온라인 예약</span>
+    </div>
+    <form id="reservationForm" onsubmit="return validateForm()">
+        <fieldset>
+            <legend>메뉴를 골라주세요.</legend>
+            <div class="menu_div">
+                <div>
+                    <label>과일 샐러드 ************** 1500원</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" onclick="minus('fruitSalad')" class="minus"> - </button>
+                    <label id="fruitSalad" class="count">0</label>
+                    <button type="button" onclick="plus('fruitSalad')" class="plus"> + </button>
+                </div>
+            </div>
+            <div class="menu_div">
+                <div>
+                    <label>샌드위치 ***************** 2500원</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" onclick="minus('sandwich')" class="minus"> - </button>
+                    <label id="sandwich" class="count">0</label>
+                    <button type="button" onclick="plus('sandwich')" class="plus"> + </button>
+                </div>
+            </div>
+            <div class="menu_div">
+                <div>
+                    <label>레모네이드 *************** 1000원</label>
+                </div>
+                <div class="button-container">
+                    <button type="button" onclick="minus('fruitJuice')" class="minus"> - </button>
+                    <label id="fruitJuice" class="count">0</label>
+                    <button type="button" onclick="plus('fruitJuice')" class="plus"> + </button>
+                </div>
+            </div>
+        </fieldset>
+        <div>
+            <span>
+                <label for="student_number">학번:</label>
+                <input id="student_number" pattern="^[0-9]{5}$" title="학번은 5자리 숫자만 입력하세요." required />
+            </span>
+            <span>
+                <label for="student_name">이름:</label>
+                <input name="name" id="student_name" pattern="^[가-힣]{2,4}$" title="이름은 한글 2-4자만 입력하세요." autocomplete="on" required />
+            </span>
+        </div>
+        <div>
+            <span>
+                <label for="phone_number">전화번호:</label>
+                <input id="phone_number" pattern="^\d{11}$" title="전화번호는 11자리 숫자만 입력하세요." required />
+            </span>
+        </div>
+        <div>
+            <input type="checkbox" id="agreement" required />
+            <label for="agreement">개인정보 수집 동의</label>
+        </div>
+        <div class="ordiv">
+            <button type="button" id="order" onclick="orderMenu()">
+                주문하기
+            </button>
+        </div>
+        <div>
+            <button type="button" id="inquiry" onclick="inquir()">
+                문의하기
+            </button>
+        </div>
+        
+    </form>
+    <script>
+        function validateForm() {
+            const studentNumber = document.getElementById("student_number").value;
+            const studentName = document.getElementById("student_name").value;
+            const phoneNumber = document.getElementById("phone_number").value;
+
+            if (!/^[0-9]{5}$/.test(studentNumber)) {
+                alert("학번은 5자리 숫자만 입력하세요.");
+                return false;
+            }
+
+            if (!/^[가-힣]{2,4}$/.test(studentName)) {
+                alert("이름은 한글 2-4자만 입력하세요.");
+                return false;
+            }
+
+            if (!/^\d{11}$/.test(phoneNumber)) {
+                alert("전화번호는 11자리 숫자만 입력하세요.");
+                return false;
+            }
+
+            return true; // 모든 검사를 통과하면 true 반환
+        }
+    </script>
+</body>
+</html>
