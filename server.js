@@ -6,7 +6,7 @@ const path = require('path');
 var mongoose = require('mongoose');
 const { Schema } = mongoose;
 // 2. testDB 세팅
-mongoose.connect('mongodb://localhost:27017/Reservation');
+mongoose.connect('mongodb+srv://jungjyh0723:k3nX0ZV6jW3WPW6D@mdionlinedb.xrskh.mongodb.net/Reservation');
 // 3. 연결된 testDB 사용
 var db = mongoose.connection;
 // 4. 연결 실패
