@@ -45,7 +45,13 @@ function orderMenu() {
         studentNumber = document.getElementById("student_number").value;
         studentName = document.getElementById("student_name").value;
         phoneNumber = document.getElementById("phone_number").value;
-    
+        pDate = "";
+        const nodeList = document.getElementsByName("option");
+        nodeList.forEach((node) => {
+            if(node.checked) {
+                pDate = node.value;
+            }
+        })
         menuText = "과일샐러드 : " + fruitSaladNum + "\n샌드위치 : " + sandwichNum + "\n생과일주스 : " + fruitJuiceNum
         menu = fruitSaladNum+fruitJuiceNum+sandwichNum
         orderer = studentNumber + " / " + studentName + " / " + phoneNumber;
@@ -54,14 +60,12 @@ function orderMenu() {
             
         if(result)
         {
-            console.log("주문 : \n" + menu + "\n" + orderer);
             alert("주문되었습니다.");
-            url = location.href + "reserve?snum="+studentNumber+"&sname="+studentName+"&pnum="+phoneNumber+"&menu="+menu+"&date=11/5";
+            url = location.href + "reserve?snum="+studentNumber+"&sname="+studentName+"&pnum="+phoneNumber+"&menu="+menu+"&date="+pDate;
             location.href = url;
         }
         else
         {
-            console.log("취소");
             alert("취소되었습니다.");
         }
     }
