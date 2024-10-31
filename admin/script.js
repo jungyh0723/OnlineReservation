@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // 모든 예약 정보를 가져오기
         const response = await fetch('/reserve/all');
         const reservations = await response.json();
-
+        var fruit = 0;
+        var lemonade = 0;
+        var sandwhich = 0;
         // 예약 정보를 리스트에 추가
         reservations.forEach(reservation => {
             const reservationItem = document.createElement('div');
@@ -25,7 +27,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
             `;
             reservationList.appendChild(reservationItem);
+            fruit += reservation.sMenu.fruit;
+            lemonade += reservation.sMenu.lemonade;
+            sandwhich += reservation.sMenu.sandwhich;
         });
+        const fl = document.getElementById("fruitL");
+        fl.innerText = "과일상자 : " + fruit + "  /  ";
+        const ll = document.getElementById("lemonadeL");
+        ll.innerText = "레모네이드 : " + lemonade + "  /  ";
+        const sl = document.getElementById("sandwhichL");
+        sl.innerText = "샌드위치 : " + sandwhich + "  /  ";
     } catch (error) {
         console.error("Error loading reservations:", error);
         reservationList.innerHTML = `<p style="color: red;">Failed to load reservations. Please try again later.</p>`;
