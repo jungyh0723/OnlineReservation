@@ -45,7 +45,8 @@ function orderMenu() {
         studentNumber = document.getElementById("student_number").value;
         studentName = document.getElementById("student_name").value;
         phoneNumber = document.getElementById("phone_number").value;
-    
+        pDate = document.querySelector('input[name="option"]:checked').value;
+        console.log(pDate)
         menuText = "과일샐러드 : " + fruitSaladNum + "\n샌드위치 : " + sandwichNum + "\n생과일주스 : " + fruitJuiceNum
         menu = fruitSaladNum+fruitJuiceNum+sandwichNum
         orderer = studentNumber + " / " + studentName + " / " + phoneNumber;
