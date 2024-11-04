@@ -26,7 +26,9 @@ const rsInfo = new Schema({
         fruit: Number,
         sandwhich: Number,
         lemonade: Number
-    }
+    },
+    prepared: Boolean,
+    served: Boolean
 })
 
 const pInfo = mongoose.model('reserve', rsInfo);
@@ -60,6 +62,8 @@ app.get('/reserve', async function(req, res) {
     reservant.sMenu.fruit = menu[0];
     reservant.sMenu.lemonade = menu[1];
     reservant.sMenu.sandwhich = menu[2];
+    reservant.prepared = false;
+    reservant.served = false;
     var check1 = (await db.collection("reserve").find({sName: sname}).toArray()).length;
     var check2 = (await db.collection("reserve").find({sNum: snum}).toArray()).length;
     console.log(check1 + "    /    " + check2)
@@ -99,6 +103,26 @@ app.delete('/api/delete', async function(req, res) {
         res.status(500).json({ error: "데이터를 삭제하는 데 오류 발생" });
     }
    
+});
+
+app.post('/api/prepare', async function(req, res) {
+    try {
+        num = parseInt(req.query.sNum);
+        const result = await db.collection("reserve").updateOne({sNum: num}, { $set: {prepared: true}});
+        return res.status(200).json({message: "처리되었습니다."});
+    } catch (error) {
+        return res.status(500).json({error: "오류발생"});
+    }
+});
+
+app.post('/api/serve', async function(req, res) {
+    try {
+        num = parseInt(req.query.sNum);
+        const result = await db.collection("reserve").updateOne({sNum: num}, { $set: {served: true}});
+        return res.status(200).json({message: "처리되었습니다."});
+    } catch (error) {
+        return res.status(500).json({error: "오류발생"});
+    }
 });
 
 app.get('/mdiyh', function(req, res) {

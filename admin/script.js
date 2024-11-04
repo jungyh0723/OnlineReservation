@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <li>레모네이드: ${reservation.sMenu.lemonade}</li>
                     <li>샌드위치: ${reservation.sMenu.sandwhich}</li>
                 </ul>
+                <p><strong>준비:</strong> ${reservation.prepared}</p>
+                <p><strong>완료:</strong> ${reservation.served} </p>
                 <button onclick="deleteOne(\'${reservation.sNum}\')">지우기 </button>
+                <button onclick="prepare(\'${reservation.sNum}\')"> 준비완료 </button>
+                <button onclick="serve(\'${reservation.sNum}\')"> 서빙완료 </button>
             </div>
             `;
             reservationList.appendChild(reservationItem);
@@ -50,6 +54,26 @@ async function deleteOne(st) {
         result = await fetch("api/delete?sNum="+st, {method: 'DELETE'})
         console.log(result)
         document.getElementById(st).remove()
+    } else {
+        alert("취소되었습니다.")
+    }
+}
+
+async function prepare(num) {
+    const res = confirm("준비완료되었습니까?");
+    if(res) {
+        result = await fetch("api/prepare?sNum="+num, {method: 'POST'});
+        document.getElementById(num).remove()
+    } else {
+        alert("취소되었습니다.")
+    }
+}
+
+async function serve(num) {
+    const res = confirm("서빙완료되었습니까?");
+    if(res) {
+        result = await fetch("api/serve?sNum="+num, {method: 'POST'});
+        document.getElementById(num).remove()
     } else {
         alert("취소되었습니다.")
     }
