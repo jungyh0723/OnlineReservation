@@ -31,9 +31,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
             `;
             reservationList.appendChild(reservationItem);
-            fruit += reservation.sMenu.fruit;
-            lemonade += reservation.sMenu.lemonade;
-            sandwhich += reservation.sMenu.sandwhich;
+            if(!reservation.prepared) {
+                fruit += reservation.sMenu.fruit;
+                lemonade += reservation.sMenu.lemonade;
+                sandwhich += reservation.sMenu.sandwhich;
+            }
         });
         const fl = document.getElementById("fruitL");
         fl.innerText = "과일상자 : " + fruit + "  /  ";
