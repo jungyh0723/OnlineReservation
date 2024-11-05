@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <button onclick="deleteOne(\'${reservation.sNum}\')">지우기 </button>
                 <button onclick="prepare(\'${reservation.sNum}\')"> 준비완료 </button>
                 <button onclick="serve(\'${reservation.sNum}\')"> 서빙완료 </button>
+                <label> ${reservation.sMenu.fruit*1500 + reservation.sMenu.lemonade*1000 + reservation.sMenu.sandwhich*1500} 원 </label>
             </div>
             `;
             reservationList.appendChild(reservationItem);
